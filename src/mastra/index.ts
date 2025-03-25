@@ -1,15 +1,15 @@
 import { Mastra } from "@mastra/core/mastra";
 import { createLogger } from "@mastra/core/logger";
-import { cursorRulesWorkflow } from "./workflows";
-import { cursorRulesAgent } from "./agents";
+import { cursorRulesWorkflow,candidateWorkflow,separateWorkflow} from "./workflows";
+import { cursorRulesAgent, recruiterAgent} from "./agents";
 
 
 export const mastra = new Mastra({
     agents: {
-        cursorRulesAgent,
+        cursorRulesAgent,recruiterAgent
     },
     workflows: {
-        cursorRulesWorkflow,
+        cursorRulesWorkflow,candidateWorkflow,separateWorkflow
     },
     logger: createLogger({
         name: "GitHub Cursor Rules Agent",

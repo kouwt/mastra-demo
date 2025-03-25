@@ -73,14 +73,11 @@ const instructionPrompt = `あなたはGitHubリポジトリを解析して、Cu
 これにより、トークン制限を回避して詳細なチートシートを作成できます。
 最初のセクション保存時はappend=falseで、それ以降のセクションはappend=trueで追記モードを使用してください。
 `;
-
-const isGemini = process.env.MODEL === "gemini";
-
 // 単一のCursor Rules生成エージェント
 export const cursorRulesAgent = new Agent({
     name: "Cursor Rules生成エージェント",
     instructions: instructionPrompt,
-    model: isGemini ? google("gemini-2.0-flash-001") : openRouter,
+    model: google("gemini-2.0-flash-001"),
     tools: {
         cloneRepositoryTool,
         readmeAnalyzerTool,
@@ -92,3 +89,9 @@ export const cursorRulesAgent = new Agent({
     },
     memory,
 });
+
+export const recruiterAgent = new Agent({
+    name: 'リクルーターエージェント',
+    instructions: `あなたは採用担当者です。`,
+    model: google('gemini-2.0-flash-001'),
+  });
